@@ -182,8 +182,8 @@ static void progressbar_draw(progressbar *bar, char* otherinfo)
 	  : progressbar_calc_time_components(bar->leftTime);
 
   // Draw the ETA
+  // printf("screen_width: %d label: %d\n", screen_width, label_length);
   fprintf(stdout, ETA_FORMAT, eta.minutes, eta.seconds);
-
   // Draw the progressbar
   fputc(bar->format.begin, stdout);
   progressbar_write_char(stdout, bar->format.fill, bar_piece_current);
@@ -206,12 +206,12 @@ static void progressbar_draw(progressbar *bar, char* otherinfo)
   fprintf(stdout, ETA_FORMAT, etd.minutes, etd.seconds);
   if (otherinfo) { 
 	  fprintf(stdout, " | "); 
-	  fprintf(stdout, otherinfo); 
+	  fprintf(stdout, otherinfo);
 	  if(strlen(otherinfo) < bar->otherInfoLen)
 		progressbar_write_char(stdout, ' ', bar->otherInfoLen - strlen(otherinfo));
 	  bar->otherInfoLen = strlen(otherinfo);
   }
-  fputc('\r', stdout);
+  fputc('\n', stdout);
   }
 
 /**
