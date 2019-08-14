@@ -7,7 +7,7 @@
 * \copyright BSD 3-Clause
 *
 * progressbar -- a C class (by convention) for displaying progress
-* on the command line (to stdout).
+* on the command line (to stderr).
 */
 #pragma warning (disable : 4244)
 #pragma warning (disable : 4267)
@@ -109,8 +109,8 @@ static void progressbar_write_char(FILE *file, const int ch, const size_t times)
 
 void progressbar_clear(progressbar * bar)
 {
-	if(bar) progressbar_write_char(stdout, ' ', bar->max);
-	fputc('\r', stdout);
+	if(bar) progressbar_write_char(stderr, ' ', bar->max);
+	fputc('\r', stderr);
 }
 
 static int progressbar_max(int x, int y) {
@@ -183,13 +183,13 @@ static void progressbar_draw(progressbar *bar, char* otherinfo)
 
   // Draw the ETA
   // printf("screen_width: %d label: %d\n", screen_width, label_length);
-  fprintf(stdout, ETA_FORMAT, eta.minutes, eta.seconds);
+  fprintf(stderr, ETA_FORMAT, eta.minutes, eta.seconds);
   // Draw the progressbar
-  fputc(bar->format.begin, stdout);
-  progressbar_write_char(stdout, bar->format.fill, bar_piece_current);
-  progressbar_write_char(stdout, ' ', bar_piece_count - bar_piece_current);
-  fputc(bar->format.end, stdout);
-  fputc(' ', stdout);
+  fputc(bar->format.begin, stderr);
+  progressbar_write_char(stderr, bar->format.fill, bar_piece_current);
+  progressbar_write_char(stderr, ' ', bar_piece_count - bar_piece_current);
+  fputc(bar->format.end, stderr);
+  fputc(' ', stderr);
 
   /*remove the lable by dpeng
   if (label_width == 0) {
@@ -198,20 +198,20 @@ static void progressbar_draw(progressbar *bar, char* otherinfo)
     bar_width += 1;
   } else {
     // Draw the label
-    fwrite(bar->label, 1, label_width, stdout);
-	fputc('\r', stdout);
+    fwrite(bar->label, 1, label_width, stderr);
+	fputc('\r', stderr);
   }*/
 
   // Draw the ETD
-  fprintf(stdout, ETA_FORMAT, etd.minutes, etd.seconds);
+  fprintf(stderr, ETA_FORMAT, etd.minutes, etd.seconds);
   if (otherinfo) { 
-	  fprintf(stdout, " | "); 
-	  fprintf(stdout, otherinfo);
+	  fprintf(stderr, " | "); 
+	  fprintf(stderr, otherinfo);
 	  if(strlen(otherinfo) < bar->otherInfoLen)
-		progressbar_write_char(stdout, ' ', bar->otherInfoLen - strlen(otherinfo));
+		progressbar_write_char(stderr, ' ', bar->otherInfoLen - strlen(otherinfo));
 	  bar->otherInfoLen = strlen(otherinfo);
   }
-  fputc('\n', stdout);
+  fputc('\r', stderr);
   }
 
 /**
@@ -220,10 +220,10 @@ static void progressbar_draw(progressbar *bar, char* otherinfo)
 void progressbar_finish(progressbar *bar)
 {
   // Make sure we fill the progressbar so things look complete.
-  //progressbar_draw(bar);
+  progressbar_draw(bar, NULL);
 
-  // Print a newline, so that future outputs to stdout look prettier
-  fprintf(stdout, "\n");
+  // Print a newline, so that future outputs to stderr look prettier
+  fprintf(stderr, "\n");
 
   // We've finished with this progressbar, so go ahead and free it.
   progressbar_free(bar);

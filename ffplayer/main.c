@@ -41,7 +41,6 @@ void *progressbarThread(void *vargp)
                 seconds -= minutes * 60;
                 sprintf(buf, "%02d:%02d", minutes, seconds);
                 m_pProgressBar = progressbar_new(buf, 100);
-                printf("\r\n");
             }
             else
             {
@@ -52,7 +51,7 @@ void *progressbarThread(void *vargp)
                 progressbar_update(m_pProgressBar, (unsigned long)(curTime * 100 / totalTime), (char*)"");
             }
         }
-        usleep(999000);
+        usleep(999999);
     }
     
     return NULL;
@@ -77,7 +76,7 @@ void *playThread(void *vargp)
 int main(int argc, const char * argv[]) {
     // insert code here...
     
-    ffplay_toggle_set_init_volume(5);
+    ffplay_toggle_set_init_volume(50);
     char* filename[256];
     for (int i = 1; i<argc; i++)
     {
