@@ -17,14 +17,15 @@ void *progressbarThread(void *vargp)
 {
     progressbar *m_pProgressBar = NULL;
 
-    double curTime;
-    int    totalTime;
-    curTime = ffplay_get_stream_curtime();
-    totalTime = ffplay_get_stream_totaltime();
-    while(totalTime <= 1){
+    double curTime   = 0;;
+    int    totalTime = 0;
+    int    trytime   = 0;
+    while(totalTime <= 1 && trytime <= 10)
+    {
         usleep(1000000);
         totalTime = ffplay_get_stream_totaltime();
         curTime = ffplay_get_stream_curtime();
+        trytime++;
     }
     while(totalTime - curTime > 1)
     {
@@ -59,17 +60,19 @@ void *progressbarThread(void *vargp)
 
 void *playThread(void *vargp)
 {
-    char filename[256];
-    strcpy(filename, vargp);
-    int ret = ffplay_init((char*)filename, 400, 300);
-    if (ret == 0)
+    if (0 == ffplay_init((char*)vargp, 400, 300))
     {
         pthread_t progressbarThread_id;
         pthread_create(&progressbarThread_id, NULL, progressbarThread, NULL);
         pthread_join(progressbarThread_id, NULL);
-        ffplay_play(0x00000000);
+        int ret = ffplay_play(pthread_self());
+        if (ret == 0)  //indicate that this file play comes to an end
+        {
+            pthread_detach( progressbarThread_id );
+            return NULL;
+        }
+        else printf("playing error, will pass play this file.");
     }
-
     return NULL;
 }
 
