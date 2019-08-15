@@ -7,17 +7,27 @@
 		<key>ffplayer.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
-		<key>ffplayerRelease.xcscheme</key>
+		<key>release.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>14C1407722F80829001A9F8B</key>
+		<key>14FAA69E2304F86600085C1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>14FAA6B42304F86700085C1C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>14FAA6BF2304F86700085C1C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

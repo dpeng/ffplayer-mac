@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14C1407722F80829001A9F8B"
-               BuildableName = "ffplayer"
+               BlueprintIdentifier = "14FAA69E2304F86600085C1C"
+               BuildableName = "ffplayer.app"
                BlueprintName = "ffplayer"
                ReferencedContainer = "container:ffplayer.xcodeproj">
             </BuildableReference>
@@ -28,12 +28,32 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "14FAA6B42304F86700085C1C"
+               BuildableName = "ffplayerTests.xctest"
+               BlueprintName = "ffplayerTests"
+               ReferencedContainer = "container:ffplayer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "14FAA6BF2304F86700085C1C"
+               BuildableName = "ffplayerUITests.xctest"
+               BlueprintName = "ffplayerUITests"
+               ReferencedContainer = "container:ffplayer.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14C1407722F80829001A9F8B"
-            BuildableName = "ffplayer"
+            BlueprintIdentifier = "14FAA69E2304F86600085C1C"
+            BuildableName = "ffplayer.app"
             BlueprintName = "ffplayer"
             ReferencedContainer = "container:ffplayer.xcodeproj">
          </BuildableReference>
@@ -55,8 +75,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14C1407722F80829001A9F8B"
-            BuildableName = "ffplayer"
+            BlueprintIdentifier = "14FAA69E2304F86600085C1C"
+            BuildableName = "ffplayer.app"
             BlueprintName = "ffplayer"
             ReferencedContainer = "container:ffplayer.xcodeproj">
          </BuildableReference>
@@ -84,8 +104,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14C1407722F80829001A9F8B"
-            BuildableName = "ffplayer"
+            BlueprintIdentifier = "14FAA69E2304F86600085C1C"
+            BuildableName = "ffplayer.app"
             BlueprintName = "ffplayer"
             ReferencedContainer = "container:ffplayer.xcodeproj">
          </BuildableReference>
