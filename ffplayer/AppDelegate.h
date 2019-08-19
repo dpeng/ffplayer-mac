@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+char* m_filename[256];
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 

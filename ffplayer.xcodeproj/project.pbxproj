@@ -42,6 +42,7 @@
 		1412C9842304FB75004BB0FF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1412C9832304FB75004BB0FF /* libz.tbd */; };
 		1412C9862304FB80004BB0FF /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1412C9852304FB80004BB0FF /* libbz2.tbd */; };
 		1412C9882304FB90004BB0FF /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1412C9872304FB90004BB0FF /* libiconv.tbd */; };
+		14273EF2230A795E004C94B2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14273EF1230A795E004C94B2 /* Foundation.framework */; };
 		14FAA6A42304F86600085C1C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FAA6A32304F86600085C1C /* AppDelegate.m */; };
 		14FAA6A72304F86600085C1C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FAA6A62304F86600085C1C /* ViewController.m */; };
 		14FAA6A92304F86700085C1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14FAA6A82304F86700085C1C /* Assets.xcassets */; };
@@ -296,6 +297,7 @@
 		1412C9832304FB75004BB0FF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		1412C9852304FB80004BB0FF /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
 		1412C9872304FB90004BB0FF /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		14273EF1230A795E004C94B2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14FAA69F2304F86600085C1C /* ffplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ffplayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14FAA6A22304F86600085C1C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		14FAA6A32304F86600085C1C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14273EF2230A795E004C94B2 /* Foundation.framework in Frameworks */,
 				1412C9882304FB90004BB0FF /* libiconv.tbd in Frameworks */,
 				1412C9862304FB80004BB0FF /* libbz2.tbd in Frameworks */,
 				1412C9842304FB75004BB0FF /* libz.tbd in Frameworks */,
@@ -723,6 +726,7 @@
 		1412C9762304FB1E004BB0FF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14273EF1230A795E004C94B2 /* Foundation.framework */,
 				1412C9872304FB90004BB0FF /* libiconv.tbd */,
 				1412C9852304FB80004BB0FF /* libbz2.tbd */,
 				1412C9832304FB75004BB0FF /* libz.tbd */,
