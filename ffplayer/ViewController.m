@@ -11,14 +11,14 @@
 #include "../ffplay/ffplay.h"
 
 extern char* m_filename[256];
+progressbar *m_pProgressBar = NULL;
+bool m_progressThreadexit = false;
 void *progressbarThread(void *vargp)
 {
-    progressbar *m_pProgressBar = NULL;
-    
-    double curTime   = 0;;
+    double curTime   = 0.0;
     int    totalTime = 0;
     int    trytime   = 0;
-    while(totalTime <= 1 && trytime <= 10)
+    while((totalTime <= 1 && trytime <= 10) || isnan(curTime))
     {
         usleep(100000);
         totalTime = ffplay_get_stream_totaltime();
@@ -27,6 +27,8 @@ void *progressbarThread(void *vargp)
     }
     while(totalTime - curTime > 1)
     {
+        if(m_progressThreadexit)
+            break;
         curTime = ffplay_get_stream_curtime();
         if ((totalTime >= 1) && !isnan(curTime))
         {
@@ -75,14 +77,15 @@ char ChOpenFile[256] = {0};
 - (IBAction)buttonPlay:(id)sender {
     if (0 == ffplay_init(m_filename[0], 400, 300))
     {
+        m_progressThreadexit = false;
         pthread_create(&progressbarThread_id, NULL, progressbarThread, NULL);
-        pthread_join(progressbarThread_id, NULL);
+        pthread_detach( progressbarThread_id );
         int ret = ffplay_play(NULL);
-        if (ret == 0)  //indicate that this file play comes to an end
+        if (ret != 0)  //indicate that this file play comes to an end
         {
-            pthread_detach( progressbarThread_id );
+            printf("playing error, will pass play this file.");
         }
-        else printf("playing error, will pass play this file.");
+        m_progressThreadexit = true;
     }
     
 }
@@ -108,8 +111,13 @@ char ChOpenFile[256] = {0};
     }
 }
 - (IBAction)buttonStopPlay:(id)sender {
-    pthread_detach( progressbarThread_id );
     ffplay_stop();
+    if (m_pProgressBar)
+    {
+        m_progressThreadexit = true;
+        progressbar_finish(m_pProgressBar);
+        m_pProgressBar = NULL;
+    }
 }
 
 @end

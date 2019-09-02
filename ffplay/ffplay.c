@@ -3367,7 +3367,9 @@ static int event_loop(VideoState *cur_stream, void *hwnd)
     double incr, pos, frac;
     int ret = 0;
 
-    for (;cur_stream->eof != 1;) {
+    for (;;) {
+        if(cur_stream->eof == 1)
+            ret = -1;
         double x;
         refresh_loop_wait_event(cur_stream, &event, hwnd);
         switch (event.type) {
@@ -3558,6 +3560,8 @@ static int event_loop(VideoState *cur_stream, void *hwnd)
         default:
             break;
         }
+        if(ret != 0)
+            break;
     }
     return ret;
 }
@@ -3880,6 +3884,8 @@ void ffplay_stop(void)
 {
 	if (NULL != m_curstream)
 	{
+        m_curstream->eof = 1;
+        av_usleep(1000);
 		if((m_streamIndex[AVMEDIA_TYPE_VIDEO] >= 0) && (NULL != m_curstream->ic))
 			avcodec_close(m_curstream->ic->streams[m_streamIndex[AVMEDIA_TYPE_VIDEO]]->codec);
 		if((m_streamIndex[AVMEDIA_TYPE_AUDIO] >= 0) && (NULL != m_curstream->ic))
