@@ -10,5 +10,6 @@
 
 @interface ViewController : NSViewController
 
+- (void)timerAction:(NSTimer*)timer;
 @end
 
