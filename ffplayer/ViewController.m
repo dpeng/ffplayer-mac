@@ -13,7 +13,8 @@
 extern char* m_filename[256];
 progressbar *m_pProgressBar = NULL;
 
-NSTimer *playProcessTimer;
+NSTimer *playProcessTimerID;
+NSTimer *playTimerID;
 @implementation ViewController
 
 - (void)viewDidLoad {
@@ -28,8 +29,15 @@ NSTimer *playProcessTimer;
 
     // Update the view, if already loaded.
 }
-
-- (void)timerAction:(NSTimer*)timer
+- (void)playTimerAction:(NSTimer*)timer;
+{
+    int ret = ffplay_play(NULL);
+    if (ret != 0)  //indicate that this file play comes to an end
+    {
+        printf("playing error, will pass play this file.");
+    }
+}
+- (void)playProcessTimerAction:(NSTimer*)timer
 {
     double curTime   = 0.0;
     int    totalTime = 0;
@@ -65,16 +73,16 @@ char ChOpenFile[256] = {0};
 - (IBAction)buttonPlay:(id)sender {
     if (0 == ffplay_init(m_filename[0], 400, 300))
     {
-        ViewController *processDisplayTimer = [[ViewController alloc] init];
-        playProcessTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:processDisplayTimer selector:@selector(timerAction:) userInfo:nil repeats:YES];
+        ViewController *processTimer = [[ViewController alloc] init];
+        ViewController *playTimer = [[ViewController alloc] init];
+        
+        playProcessTimerID = [NSTimer scheduledTimerWithTimeInterval:1 target:processTimer selector:@selector(playProcessTimerAction:) userInfo:nil repeats:YES];
+        playTimerID = [NSTimer scheduledTimerWithTimeInterval:1 target:playTimer selector:@selector(playTimerAction:) userInfo:nil repeats:NO];
 
-        int ret = ffplay_play(NULL);
-        if (ret != 0)  //indicate that this file play comes to an end
-        {
-            printf("playing error, will pass play this file.");
-        }
-        [playProcessTimer invalidate];
-        playProcessTimer = nil;
+        //[playTimerID invalidate];
+        //playTimerID = nil;
+        //[playProcessTimerID invalidate];
+        //playProcessTimerID = nil;
     }
     
 }
@@ -100,8 +108,10 @@ char ChOpenFile[256] = {0};
     }
 }
 - (IBAction)buttonStopPlay:(id)sender {
-    [playProcessTimer invalidate];
-    playProcessTimer = nil;
+    [playTimerID invalidate];
+    playTimerID = nil;
+    [playProcessTimerID invalidate];
+    playProcessTimerID = nil;
     ffplay_stop();
     if (m_pProgressBar)
     {

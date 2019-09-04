@@ -10,6 +10,7 @@
 
 @interface ViewController : NSViewController
 
-- (void)timerAction:(NSTimer*)timer;
+- (void)playProcessTimerAction:(NSTimer*)timer;
+- (void)playTimerAction:(NSTimer*)timer;
 @end
 
