@@ -32,10 +32,10 @@ NSTimer *playTimerID;
 - (void)playTimerAction:(NSTimer*)timer;
 {
     int ret = ffplay_play(NULL);
-    if (ret != 0)  //indicate that this file play comes to an end
-    {
-        printf("playing error, will pass play this file.");
-    }
+    if (ret == 0)  printf("file comes to end, goodbye~");
+    else if (ret == -1) printf("you stop this file playing, goodbye~");
+    else printf("playing error, will pass play this file.");
+    [self buttonStopPlay:nil];
 }
 - (void)playProcessTimerAction:(NSTimer*)timer
 {
@@ -78,11 +78,6 @@ char ChOpenFile[256] = {0};
         
         playProcessTimerID = [NSTimer scheduledTimerWithTimeInterval:1 target:processTimer selector:@selector(playProcessTimerAction:) userInfo:nil repeats:YES];
         playTimerID = [NSTimer scheduledTimerWithTimeInterval:1 target:playTimer selector:@selector(playTimerAction:) userInfo:nil repeats:NO];
-
-        //[playTimerID invalidate];
-        //playTimerID = nil;
-        //[playProcessTimerID invalidate];
-        //playProcessTimerID = nil;
     }
     
 }

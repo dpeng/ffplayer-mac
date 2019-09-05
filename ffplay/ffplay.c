@@ -3556,6 +3556,7 @@ static int event_loop(VideoState *cur_stream, void *hwnd)
         case SDL_QUIT:
         case FF_QUIT_EVENT:
 				ret = event.user.data2;
+                return ret;
             break;
         default:
             break;
