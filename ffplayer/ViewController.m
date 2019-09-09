@@ -29,9 +29,10 @@ NSTimer *playTimerID;
 
     // Update the view, if already loaded.
 }
+NSWindow *videoDisplayWindow;
 - (void)playTimerAction:(NSTimer*)timer;
 {
-    int ret = ffplay_play(NULL);
+    int ret = ffplay_play((__bridge void*)videoDisplayWindow);
     if (ret == 0)  printf("file comes to end, goodbye~");
     else if (ret == -1) printf("you stop this file playing, goodbye~");
     else printf("playing error, will pass play this file.");
@@ -73,6 +74,7 @@ char ChOpenFile[256] = {0};
 - (IBAction)buttonPlay:(id)sender {
     if (0 == ffplay_init(m_filename[0], 400, 300))
     {
+        videoDisplayWindow = self.view.window;
         ViewController *processTimer = [[ViewController alloc] init];
         ViewController *playTimer = [[ViewController alloc] init];
         

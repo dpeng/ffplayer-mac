@@ -1425,8 +1425,8 @@ static int video_open(VideoState *is, void *hwnd)
 			flags |= SDL_WINDOW_BORDERLESS;
 		else
 			flags |= SDL_WINDOW_RESIZABLE;
-		window = SDL_CreateWindow(window_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
-		//window = SDL_CreateWindowFrom(hwnd);
+		//window = SDL_CreateWindow(window_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, w, h, flags);
+		window = SDL_CreateWindowFrom(hwnd);
 		SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 		if (window) {
 			SDL_RendererInfo info;
